@@ -1,0 +1,21 @@
+{
+  "model_source_run": 15408,
+  "model_sha256": {
+    "ET_count_fixed": "dd690caebeacc70c40f8433c7e19ed3d913cbac4c656ffa8d66728c2a91f070e",
+    "SVM_count_inner_C": "2c07bc11bf66637225062b86935721ad89181ad6acab74ef7807591c06575011"
+  },
+  "training_metadata_sha256": "dc4b901066dc1417dac36af3202059bb7b7bfec8f6eb3d0ee5256a5d949cd0bb",
+  "sklearn": "1.9.1",
+  "rdkit": "2026.03.5",
+  "python": "3.12",
+  "endpoint": "Active: reported DPPH IC50<1000mg/L; Inactive:>=1000mg/L",
+  "ET_params": {
+    "n_estimators": 400,
+    "max_features": 0.2,
+    "min_samples_leaf": 2,
+    "class_weight": "balanced",
+    "random_state": 42
+  },
+  "features": "Chiral Morgan radius2,2048 hashed bits/counts; ET log1p(raw counts),SVM generalized count Tanimoto",
+  "validated_applicability_threshold": null
+}

@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "prepared_date": "2026-11-17",
+  "files": {
+    "app.py": "53b98be9f8038a187aa87ad1ba78d78c76b53228c3c829e2650cea9303e5f40d",
+    "predictor.py": "7ca29492c2f4e9abd12c7a0359ebf37dcc0fb9f567b3873274f9c556b8d9cffb",
+    "features.py": "cbea1a1440e5f9b7ec21d94aa56ee4054cf530a286b818213ac5471844bc7035",
+    "contract.json": "2ec2954fa07b1db19d0e066f477bdf3c2c290520af2de80c9c8dde189d77ecf9",
+    "sample_queries.csv": "a57b4abd6896fc4678bd62b231bfacfbc00c584b766246431d81dc59c663a458",
+    "data/training_membership.csv": "dc4b901066dc1417dac36af3202059bb7b7bfec8f6eb3d0ee5256a5d949cd0bb",
+    "data/replay_queries.csv": "e08da9e5a4ae3a987dd8c3a316ad6ceeff2998733afa55e749ff20b9e5ef5a69",
+    "data/replay_scores.csv": "6acd67ede9272196bb63c873be439056576f85781294fb5054c7b03299531f21",
+    "models/ET_count_fixed.joblib": "dd690caebeacc70c40f8433c7e19ed3d913cbac4c656ffa8d66728c2a91f070e",
+    "models/SVM_count_inner_C.joblib": "2c07bc11bf66637225062b86935721ad89181ad6acab74ef7807591c06575011"
+  },
+  "local_replay_controls": 36,
+  "local_maximum_difference": 0.0,
+  "cloud_deployment": "pending",
+  "cloud_runtime": "Python3.12"
+}

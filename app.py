@@ -19,26 +19,16 @@ with st.sidebar:
  st.markdown('- ExtraTrees\n- Tanimoto SVM')
  directory=Path(os.environ.get('DPPH_MODEL_DIR',str(HERE/'models')))
  files={}
- verification_panel=st.expander('Technical verification',expanded=False)
- with verification_panel:
-  st.caption('Frozen count-model artifacts from run15408. No model training runs in this app.')
-  for name in MODEL_NAMES:
-   local=directory/(name+'.joblib')
-   if local.is_file():files[name]=local.read_bytes();st.caption(name+' · file found')
-   else:
-    upload=st.file_uploader(name,type=['joblib'],key=name)
-    if upload:files[name]=upload.getvalue()
-  st.caption('Only the recorded final model checksums are accepted.')
+ for name in MODEL_NAMES:
+  local=directory/(name+'.joblib')
+  if local.is_file():files[name]=local.read_bytes()
 
 state=None
 if len(files)==2:
  try:state=verified_models(files[MODEL_NAMES[0]],files[MODEL_NAMES[1]])
  except Exception as e:st.error(str(e));st.stop()
  st.sidebar.success('Models verified and ready')
- with verification_panel:
-  st.caption('Model checksums verified ·36/36 reference prediction replays passed.')
-  st.caption('These checks confirm reproducible model loading and prediction, not biological accuracy.')
-else:st.info('Load both final model files to enable prediction. The download package includes an HPC export script for these files.')
+else:st.error('Prediction models are temporarily unavailable. Please contact the application maintainer.')
 
 mode=st.radio('Input',['One molecule','Batch CSV','GCMS candidate examples'],horizontal=True)
 queries=[];label=''

@@ -11,27 +11,33 @@ st.title('DPPH Molecular Predictor')
 st.write('Enter a molecular structure to predict its DPPH category with two frozen models.')
 st.caption('Active: reported DPPH IC50 <1000 mg/L · Inactive: ≥1000 mg/L. The app predicts a category, not a numerical IC50.')
 
-@st.cache_resource(show_spinner='Verifying final models and36 reference predictions…')
+@st.cache_resource(show_spinner='Checking prediction models…')
 def verified_models(et_bytes,svm_bytes):return load_bundle(dict(zip(MODEL_NAMES,[et_bytes,svm_bytes])))
 
 with st.sidebar:
- st.header('Final models')
+ st.header('Prediction models')
+ st.markdown('- ExtraTrees\n- Tanimoto SVM')
  directory=Path(os.environ.get('DPPH_MODEL_DIR',str(HERE/'models')))
- st.write('Use the two final count-model artifacts from HPC run15408.')
  files={}
- for name in MODEL_NAMES:
-  local=directory/(name+'.joblib')
-  if local.is_file():files[name]=local.read_bytes();st.caption(name+' · local file found')
-  else:
-   upload=st.file_uploader(name,type=['joblib'],key=name)
-   if upload:files[name]=upload.getvalue()
- st.caption('Only the recorded final model checksums are accepted. No model training runs in this app.')
+ verification_panel=st.expander('Technical verification',expanded=False)
+ with verification_panel:
+  st.caption('Frozen count-model artifacts from run15408. No model training runs in this app.')
+  for name in MODEL_NAMES:
+   local=directory/(name+'.joblib')
+   if local.is_file():files[name]=local.read_bytes();st.caption(name+' · file found')
+   else:
+    upload=st.file_uploader(name,type=['joblib'],key=name)
+    if upload:files[name]=upload.getvalue()
+  st.caption('Only the recorded final model checksums are accepted.')
 
 state=None
 if len(files)==2:
  try:state=verified_models(files[MODEL_NAMES[0]],files[MODEL_NAMES[1]])
  except Exception as e:st.error(str(e));st.stop()
- st.sidebar.success('Model fingerprints verified ·36/36 prediction replays passed')
+ st.sidebar.success('Models verified and ready')
+ with verification_panel:
+  st.caption('Model checksums verified ·36/36 reference prediction replays passed.')
+  st.caption('These checks confirm reproducible model loading and prediction, not biological accuracy.')
 else:st.info('Load both final model files to enable prediction. The download package includes an HPC export script for these files.')
 
 mode=st.radio('Input',['One molecule','Batch CSV','GCMS candidate examples'],horizontal=True)

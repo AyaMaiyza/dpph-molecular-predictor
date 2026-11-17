@@ -5,3 +5,4 @@ numpy==2.5.2
 joblib==1.6.0
 pandas==3.0.1
 pillow==13.0.0
+pyarrow==24.0.0
